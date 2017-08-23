@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+#include <map>
 #include <ctime>
 
 using namespace std;
@@ -31,7 +32,7 @@ struct Date
         sec = date->tm_sec;
     }
 
-    time_t timestamp() {
+    time_t timestamp() const {
         struct tm * date = new tm();
 
         date->tm_year = year - 1900;
@@ -45,13 +46,33 @@ struct Date
         return mktime(date);
     }
 
+    friend bool operator < (const Date& a, const Date& b);
+
 };
+
+bool operator < (const Date& a, const Date& b) {
+    return a.timestamp() < b.timestamp();
+}
 
 
 int main() {
 
-    time_t t = time(0);
-    Date d(t);
+    Date d;
+    d.year = 2017;
+    d.month = 1;
+    d.day = 1;
+
+    d.hour = 12;
+    d.min = 24;
+    d.sec = 0;
+
+    Date d2 = d;
+    d2.sec = 1;
+
+    map<Date, int> out;
+    out[d]++;
+
+
 
     return 0;
 }
