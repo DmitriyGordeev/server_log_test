@@ -25,13 +25,13 @@ map<Date, int> sort_user_actions(vector<UserAction> vua) {
 int main() {
 
     vector<UserAction> vua;
-    vua.emplace_back(1483257600); // Sunday, January 1, 2017 8:00:00 AM
-    vua.emplace_back(1483290000); // Sunday, January 1, 2017 5:00:00 PM
+    vua.emplace_back(1483257600, "fact_name_1"); // Sunday, January 1, 2017 8:00:00 AM
+    vua.emplace_back(1483290000, "fact_name_2"); // Sunday, January 1, 2017 5:00:00 PM
 
-    vua.emplace_back(1483376400); // Monday, January 2, 2017 5:00:00 PM
+    vua.emplace_back(1483376400, "fact_name_1"); // Monday, January 2, 2017 5:00:00 PM
 
-    vua.emplace_back(1483462800); // Tuesday, January 3, 2017 5:00:00 PM
-    vua.emplace_back(1483466400); // Tuesday, January 3, 2017 6:00:00 PM
+    vua.emplace_back(1483462800, "fact_name_2"); // Tuesday, January 3, 2017 5:00:00 PM
+    vua.emplace_back(1483466400, "fact_name_1"); // Tuesday, January 3, 2017 6:00:00 PM
 
     auto info = sort_user_actions(vua);
 
