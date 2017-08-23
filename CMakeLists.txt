@@ -3,9 +3,14 @@ project(GameLogParser)
 
 set(CMAKE_CXX_STANDARD 11)
 
+set(FILEIO_SOURCE fileio/fileio.cpp fileio/fileio.h)
+
 # main project:
-set(SOURCE_FILES main.cpp fileio/fileio.cpp fileio/fileio.h fileio/test_fileio.cpp)
-add_executable(GameLogParser ${SOURCE_FILES})
+set(SOURCE_FILES main.cpp user-action.h)
+add_executable(GameLogParser ${SOURCE_FILES} ${FILEIO_SOURCE})
+
+# dataset creator
+add_executable(create_dataset DatasetCreator/create_dataset.cpp)
 
 # tests:
-set()
+add_executable(test_fileio fileio/test_fileio.cpp ${FILEIO_SOURCE})

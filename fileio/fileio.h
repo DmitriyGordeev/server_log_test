@@ -1,9 +1,11 @@
+/* simple class for read / write files */
+
 #ifndef GAMELOGPARSER_FILEIO_H
 #define GAMELOGPARSER_FILEIO_H
 
 #include <fstream>
 
-/* simple class for read / write files: */
+
 class fileio {
 public:
     static bool readfile(const std::string& filename, std::string& content);
