@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(FILEIO_SOURCE fileio/fileio.cpp fileio/fileio.h)
 
 # main project:
-set(SOURCE_FILES main.cpp user-action.h)
+set(SOURCE_FILES main.cpp user-action.h Date.h)
 add_executable(GameLogParser ${SOURCE_FILES} ${FILEIO_SOURCE})
 
 # dataset creator
