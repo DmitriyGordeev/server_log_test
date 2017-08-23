@@ -6,9 +6,11 @@
 
 using namespace std;
 
-map<Date, map<string, int>> sort_actions(vector<UserAction> vua)
+typedef map<Date, map<string, map<vector<int>, int>>> ActionsDataBase;
+
+ActionsDataBase sort_actions(vector<UserAction> vua)
 {
-    map<Date, map<string, int>> info;
+    ActionsDataBase info;
     for(UserAction ua : vua) {
         Date d(ua.ts_fact);
         d.sec = 0; d.min = 0; d.hour = 0;

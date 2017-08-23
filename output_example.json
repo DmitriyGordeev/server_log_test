@@ -1,26 +1,117 @@
 {
-  "Date 1" : {
+  "Date 1" : [
+      {
+        "fact_name":"",
+        "combinations": [
+          {
+            "props":{
+              "prop1" : 1,
+              "prop2" : 12,
+              "prop3" : 12
+            },
+            "count": 1
+          },
+          {
+            "props":{},
+            "count": 12
+          },
+          {
+            "props":{},
+            "count": 10
+          }
+        ]
+      },
+      {
+        "fact_name":"",
+        "combinations": [
+          {
+            "props":{},
+            "count": 1
+          },
+          {
+            "props":{},
+            "count": 12
+          },
+          {
+            "props":{},
+            "count": 10
+          }
+        ]
+      }
+  ],
 
-    "fact_name_1": {
-      "prop_combination_1" : 10,
-      "prop_combination_2" : 8,
-      "prop_combination_3" : 9
+  "Date 2" : [
+    {
+      "fact_name":"",
+      "combinations": [
+        {
+          "props":{},
+          "count": 1
+        },
+        {
+          "props":{},
+          "count": 12
+        },
+        {
+          "props":{},
+          "count": 10
+        }
+      ]
     },
-
-    "fact_name_2": {
-      "prop_combination_1" : 10,
-      "prop_combination_2" : 8,
-      "prop_combination_3" : 9
+    {
+      "fact_name":"",
+      "combinations": [
+        {
+          "props":{},
+          "count": 1
+        },
+        {
+          "props":{},
+          "count": 12
+        },
+        {
+          "props":{},
+          "count": 10
+        }
+      ]
     }
+  ],
 
-  },
-
-  "Date 2" : {
-
-  },
-
-  "Date 3" : {
-
-  }
+  "Date 3" : [
+    {
+      "fact_name":"",
+      "combinations": [
+        {
+          "props":{},
+          "count": 1
+        },
+        {
+          "props":{},
+          "count": 12
+        },
+        {
+          "props":{},
+          "count": 10
+        }
+      ]
+    },
+    {
+      "fact_name":"",
+      "combinations": [
+        {
+          "props":{},
+          "count": 1
+        },
+        {
+          "props":{},
+          "count": 12
+        },
+        {
+          "props":{},
+          "count": 10
+        }
+      ]
+    }
+  ]
 
 }
