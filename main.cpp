@@ -6,6 +6,17 @@
 
 using namespace std;
 
+struct KeyObject_example {
+
+    KeyObject_example(const Date& date, const std::string& fact_name) {
+        this->date = date;
+        this->fact_name = fact_name;
+    }
+
+    Date date;
+    std::string fact_name;
+};
+
 map<Date, int> sort_user_actions(vector<UserAction> vua) {
 
     map<Date, int> out;
@@ -33,8 +44,8 @@ int main() {
     vua.emplace_back(1483462800, "fact_name_2"); // Tuesday, January 3, 2017 5:00:00 PM
     vua.emplace_back(1483466400, "fact_name_1"); // Tuesday, January 3, 2017 6:00:00 PM
 
+
+
     auto info = sort_user_actions(vua);
-
-
     return 0;
 }

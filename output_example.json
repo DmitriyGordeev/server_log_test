@@ -1,0 +1,26 @@
+{
+  "Date 1" : {
+
+    "fact_name_1": {
+      "prop_combination_1" : 10,
+      "prop_combination_2" : 8,
+      "prop_combination_3" : 9
+    },
+
+    "fact_name_2": {
+      "prop_combination_1" : 10,
+      "prop_combination_2" : 8,
+      "prop_combination_3" : 9
+    }
+
+  },
+
+  "Date 2" : {
+
+  },
+
+  "Date 3" : {
+
+  }
+
+}
