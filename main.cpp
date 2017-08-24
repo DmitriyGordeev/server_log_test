@@ -2,6 +2,7 @@
 #include <map>
 #include <set>
 #include <vector>
+#include <dirent.h>
 
 #include "Agr.h"
 #include "rapidjson/document.h"
@@ -136,6 +137,26 @@ bool parse_sample(const string& json, vector<UserAction>& actions) {
 }
 
 
+// get list of files on specified path
+bool list_files(const string& path, vector<string>& files) {
+
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir (path.c_str())) != NULL) {
+        while ((ent = readdir (dir)) != NULL) {
+            string name(ent->d_name);
+            files.push_back(name);
+        }
+        closedir (dir);
+    } else {
+        perror ("");
+        return false;
+    }
+
+    return true;
+}
+
+
 int main(int argc, char** argv) {
 
     // read and parse input json with player actions:
@@ -155,6 +176,7 @@ int main(int argc, char** argv) {
     auto agr_info = Agr::aggregate(vua);
     string json = serialize(agr_info);
     fileio::writefile("output_example.json", json);
+
 
 
     return 0;
