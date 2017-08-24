@@ -152,8 +152,10 @@ int main(int argc, char** argv) {
 //        aggregated_info[p.first] = by_fact;
 //    }
 
-//    string json = serialize(aggregated_info);
-//    fileio::writefile("serialized.json", json);
+    auto agr_info = Agr::aggregate(vua);
+
+    string json = serialize(agr_info);
+    fileio::writefile("serialized.json", json);
 
     return 0;
 }
