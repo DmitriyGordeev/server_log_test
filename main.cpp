@@ -60,7 +60,9 @@ string serialize(const map<Date, map<string, map<props, int>>>& input) {
     for(auto p_date : input)
     {
         time_t ts = p_date.first.timestamp();
-        pw.Key(ctime(&ts));
+        string date_str = ctime(&ts);
+        date_str.pop_back();
+        pw.Key(date_str.c_str());
         pw.StartArray();
 
         for(auto p_fact : p_date.second) {
@@ -168,10 +170,6 @@ bool parse_sample(const string& json, vector<UserAction>& actions)
 
     return true;
 }
-
-
-
-
 
 int main() {
 
