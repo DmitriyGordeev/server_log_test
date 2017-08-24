@@ -2,8 +2,7 @@
 
 using namespace std;
 
-std::map<Date, std::map<std::string, std::map<props, int>>> Agr::aggregate(const std::vector<UserAction>& input)
-{
+std::map<Date, std::map<std::string, std::map<props, int>>> Agr::aggregate(const std::vector<UserAction>& input) {
     auto date_mapping = sort_date(input);
     map<Date, map<string, map<props, int>>> agr_info;
 
@@ -14,6 +13,8 @@ std::map<Date, std::map<std::string, std::map<props, int>>> Agr::aggregate(const
     return agr_info;
 };
 
+
+// privates:
 map<Date, vector<UserAction>> Agr::sort_date(const vector<UserAction>& vua) {
 
     map<Date, vector<UserAction>> out;

@@ -154,7 +154,8 @@ int main(int argc, char** argv) {
     // aggregate info and output to json
     auto agr_info = Agr::aggregate(vua);
     string json = serialize(agr_info);
-    fileio::writefile("agr.json", json);
+    fileio::writefile("output_example.json", json);
+
 
     return 0;
 }

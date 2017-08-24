@@ -1,117 +1,117 @@
 {
-  "Date 1" : [
-      {
-        "fact_name":"",
-        "combinations": [
-          {
-            "props":{
-              "prop1" : 1,
-              "prop2" : 12,
-              "prop3" : 12
-            },
-            "count": 1
-          },
-          {
-            "props":{},
-            "count": 12
-          },
-          {
-            "props":{},
-            "count": 10
-          }
-        ]
-      },
-      {
-        "fact_name":"",
-        "combinations": [
-          {
-            "props":{},
-            "count": 1
-          },
-          {
-            "props":{},
-            "count": 12
-          },
-          {
-            "props":{},
-            "count": 10
-          }
-        ]
-      }
-  ],
-
-  "Date 2" : [
-    {
-      "fact_name":"",
-      "combinations": [
+    "Thu Jan 26 03:00:00 2017": [
         {
-          "props":{},
-          "count": 1
+            "fact_name": "action_1",
+            "combinations": [
+                {
+                    "props": {
+                        "p1": 1,
+                        "p2": 2,
+                        "p3": 3
+                    },
+                    "count": 1
+                }
+            ]
         },
         {
-          "props":{},
-          "count": 12
+            "fact_name": "action_2",
+            "combinations": [
+                {
+                    "props": {
+                        "p1": 11,
+                        "p2": 22,
+                        "p3": 33
+                    },
+                    "count": 1
+                }
+            ]
         },
         {
-          "props":{},
-          "count": 10
+            "fact_name": "action_3",
+            "combinations": [
+                {
+                    "props": {
+                        "p1": 1,
+                        "p2": 2,
+                        "p3": 3
+                    },
+                    "count": 1
+                }
+            ]
         }
-      ]
-    },
-    {
-      "fact_name":"",
-      "combinations": [
+    ],
+    "Fri Jan 27 03:00:00 2017": [
         {
-          "props":{},
-          "count": 1
-        },
-        {
-          "props":{},
-          "count": 12
-        },
-        {
-          "props":{},
-          "count": 10
+            "fact_name": "action_1",
+            "combinations": [
+                {
+                    "props": {
+                        "p1": 1,
+                        "p2": 2,
+                        "p3": 3
+                    },
+                    "count": 1
+                }
+            ]
         }
-      ]
-    }
-  ],
-
-  "Date 3" : [
-    {
-      "fact_name":"",
-      "combinations": [
+    ],
+    "Sat Jan 28 03:00:00 2017": [
         {
-          "props":{},
-          "count": 1
+            "fact_name": "action_1",
+            "combinations": [
+                {
+                    "props": {
+                        "p1": 1,
+                        "p2": 2,
+                        "p3": 3
+                    },
+                    "count": 2
+                },
+                {
+                    "props": {
+                        "p1": 12,
+                        "p2": 2,
+                        "p3": 3
+                    },
+                    "count": 1
+                }
+            ]
         },
         {
-          "props":{},
-          "count": 12
-        },
-        {
-          "props":{},
-          "count": 10
+            "fact_name": "action_3",
+            "combinations": [
+                {
+                    "props": {
+                        "p1": 111,
+                        "p2": 222,
+                        "p3": 333
+                    },
+                    "count": 1
+                }
+            ]
         }
-      ]
-    },
-    {
-      "fact_name":"",
-      "combinations": [
+    ],
+    "Sun Jan 29 03:00:00 2017": [
         {
-          "props":{},
-          "count": 1
-        },
-        {
-          "props":{},
-          "count": 12
-        },
-        {
-          "props":{},
-          "count": 10
+            "fact_name": "action_1",
+            "combinations": [
+                {
+                    "props": {
+                        "p1": 11,
+                        "p2": 22,
+                        "p3": 33
+                    },
+                    "count": 1
+                },
+                {
+                    "props": {
+                        "p1": 111,
+                        "p2": 222,
+                        "p3": 333
+                    },
+                    "count": 1
+                }
+            ]
         }
-      ]
-    }
-  ]
-
+    ]
 }
