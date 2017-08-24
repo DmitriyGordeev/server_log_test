@@ -1,0 +1,73 @@
+{
+    "Sun Jan  1 03:00:00 2017\n": [
+        {
+            "fact_name": "fact_name_1",
+            "combinations": [
+                {
+                    "props": {
+                        "prop_name1": 1,
+                        "prop_name2": 2,
+                        "prop_name3": 3
+                    },
+                    "count": 2
+                }
+            ]
+        },
+        {
+            "fact_name": "fact_name_2",
+            "combinations": [
+                {
+                    "props": {
+                        "prop_name1": 11,
+                        "prop_name2": 22,
+                        "prop_name3": 33
+                    },
+                    "count": 1
+                }
+            ]
+        }
+    ],
+    "Mon Jan  2 03:00:00 2017\n": [
+        {
+            "fact_name": "fact_name_1",
+            "combinations": [
+                {
+                    "props": {
+                        "prop_name1": 111,
+                        "prop_name2": 222,
+                        "prop_name3": 333
+                    },
+                    "count": 1
+                }
+            ]
+        }
+    ],
+    "Tue Jan  3 03:00:00 2017\n": [
+        {
+            "fact_name": "fact_name_1",
+            "combinations": [
+                {
+                    "props": {
+                        "prop_name1": 111,
+                        "prop_name2": 222,
+                        "prop_name3": 333
+                    },
+                    "count": 1
+                }
+            ]
+        },
+        {
+            "fact_name": "fact_name_2",
+            "combinations": [
+                {
+                    "props": {
+                        "prop_name1": 111,
+                        "prop_name2": 222,
+                        "prop_name3": 333
+                    },
+                    "count": 1
+                }
+            ]
+        }
+    ]
+}
