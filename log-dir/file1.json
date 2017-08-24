@@ -1,0 +1,14 @@
+{
+    "actions": [
+        {
+            "ts_fact": 1485600843,
+            "fact_name": "action_1",
+            "actor_id": 122423,
+            "props": {
+                "p1": 1,
+                "p2": 2,
+                "p3": 3
+            }
+        }
+    ]
+}
