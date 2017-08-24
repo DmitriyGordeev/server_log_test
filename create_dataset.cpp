@@ -3,8 +3,8 @@
 #include <vector>
 #include <map>
 
-#include "../user-action.h"
-#include "../fileio/fileio.h"
+#include "user-action.h"
+#include "fileio/fileio.h"
 
 using namespace std;
 using namespace rapidjson;
@@ -44,8 +44,8 @@ struct Randomizer {
 
 };
 
-
 string serialize_action_array(const vector<UserAction>& vua) {
+
     StringBuffer sb;
     PrettyWriter<StringBuffer> pw(sb);
 
@@ -61,6 +61,7 @@ string serialize_action_array(const vector<UserAction>& vua) {
     pw.EndObject();
     return sb.GetString();
 }
+
 
 
 int main(int argc, char** argv) {
