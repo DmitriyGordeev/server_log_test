@@ -45,12 +45,9 @@ struct Date
     }
 
     friend bool operator < (const Date& a, const Date& b);
-
 };
 
-bool operator < (const Date& a, const Date& b) {
-    return a.timestamp() < b.timestamp();
-}
+
 
 
 #endif //GAMELOGPARSER_DATE_H
