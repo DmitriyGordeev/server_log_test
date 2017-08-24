@@ -10,6 +10,14 @@
                         "prop_name3": 3
                     },
                     "count": 2
+                },
+                {
+                    "props": {
+                        "prop_name1": 111,
+                        "prop_name2": 222,
+                        "prop_name3": 333
+                    },
+                    "count": 1
                 }
             ]
         },

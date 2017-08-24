@@ -137,6 +137,7 @@ int main() {
     vua.emplace_back(1483257600, "fact_name_1", m1); // Sunday, January 1, 2017 8:00:00 AM
     vua.emplace_back(1483290000, "fact_name_2", m2); // Sunday, January 1, 2017 5:00:00 PM
     vua.emplace_back(1483296840, "fact_name_1", m1); // Sunday, January 1, 2017 6:54:00 PM
+    vua.emplace_back(1483296845, "fact_name_1", m3);
 
     vua.emplace_back(1483376400, "fact_name_1", m3); // Monday, January 2, 2017 5:00:00 PM
 
