@@ -10,6 +10,8 @@
 using namespace std;
 using namespace rapidjson;
 
+
+// serialize final aggregated data as json with rapidjson
 string serialize(const map<Date, map<string, map<props, int>>>& input) {
 
     StringBuffer sb;
@@ -61,6 +63,8 @@ string serialize(const map<Date, map<string, map<props, int>>>& input) {
     return sb.GetString();
 }
 
+
+// parse input player actions json (see input_example.json)
 bool parse_sample(const string& json, vector<UserAction>& actions) {
 
     Document doc;
@@ -130,6 +134,7 @@ bool parse_sample(const string& json, vector<UserAction>& actions) {
 
     return true;
 }
+
 
 int main(int argc, char** argv) {
 
