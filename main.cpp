@@ -3,52 +3,12 @@
 #include <set>
 #include <vector>
 
-#include "user-action.h"
-#include "rapidjson/prettywriter.h"
+#include "Agr.h"
 #include "rapidjson/document.h"
-#include "Date.h"
 #include "fileio/fileio.h"
 
 using namespace std;
 using namespace rapidjson;
-
-typedef map<string, int> props;
-
-map<Date, vector<UserAction>> sort_date(const vector<UserAction>& vua) {
-
-    map<Date, vector<UserAction>> out;
-    for(UserAction ua : vua) {
-
-        Date d(ua.ts_fact);
-        d.hour = 0; d.min = 0; d.sec = 0;
-
-        out[d].push_back(ua);
-    }
-
-    return out;
-};
-
-map<string, map<props, int>> sort_inside_day(const vector<UserAction>& vua) {
-
-    map<string, map<props, int>> out;
-
-    // 1. collect by fact_name
-    map<string, vector<props>> intermed;
-    for(UserAction ua : vua) {
-        intermed[ua.fact_name].push_back(ua.props);
-    }
-
-    // 2. counting each prop combination for such fact_name
-    for(auto p : intermed) {
-        map<props, int> duplicate_counts;
-        for(auto i : p.second) {
-            duplicate_counts[i]++;
-        }
-        out[p.first] = duplicate_counts;
-    }
-
-    return out;
-};
 
 string serialize(const map<Date, map<string, map<props, int>>>& input) {
 
@@ -171,7 +131,7 @@ bool parse_sample(const string& json, vector<UserAction>& actions)
     return true;
 }
 
-int main() {
+int main(int argc, char** argv) {
 
     string sample_json;
     if(!fileio::readfile("test_sample.json", sample_json)) {
@@ -185,15 +145,15 @@ int main() {
         return 1;
     }
 
-    auto by_date = sort_date(vua);
-    map<Date, map<string, map<props, int>>> aggregated_info;
-    for(auto p : by_date) {
-        map<string, map<props, int>> by_fact = sort_inside_day(p.second);
-        aggregated_info[p.first] = by_fact;
-    }
+//    auto by_date = sort_date(vua);
+//    map<Date, map<string, map<props, int>>> aggregated_info;
+//    for(auto p : by_date) {
+//        map<string, map<props, int>> by_fact = sort_inside_day(p.second);
+//        aggregated_info[p.first] = by_fact;
+//    }
 
-    string json = serialize(aggregated_info);
-    fileio::writefile("serialized.json", json);
+//    string json = serialize(aggregated_info);
+//    fileio::writefile("serialized.json", json);
 
     return 0;
 }
