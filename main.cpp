@@ -5,6 +5,7 @@
 
 #include "user-action.h"
 #include "rapidjson/prettywriter.h"
+#include "rapidjson/document.h"
 #include "Date.h"
 #include "fileio/fileio.h"
 
@@ -12,19 +13,6 @@ using namespace std;
 using namespace rapidjson;
 
 typedef map<string, int> props;
-
-/* count duplicates
- * transform multiset into map: key = element, value = repeat count
- */
-template <typename T>
-map<T, int> unique_counts(multiset<T> in) {
-    map<T, int> out;
-    for(auto i = in.begin(); i != in.end(); i = in.upper_bound(*i)) {
-        out[*i] = in.count(*i);
-    }
-    return out;
-};
-
 
 map<Date, vector<UserAction>> sort_date(const vector<UserAction>& vua) {
 
@@ -39,7 +27,6 @@ map<Date, vector<UserAction>> sort_date(const vector<UserAction>& vua) {
 
     return out;
 };
-
 
 map<string, map<props, int>> sort_inside_day(const vector<UserAction>& vua) {
 
@@ -62,7 +49,6 @@ map<string, map<props, int>> sort_inside_day(const vector<UserAction>& vua) {
 
     return out;
 };
-
 
 string serialize(const map<Date, map<string, map<props, int>>>& input) {
 
@@ -113,37 +99,93 @@ string serialize(const map<Date, map<string, map<props, int>>>& input) {
     return sb.GetString();
 }
 
+bool parse_sample(const string& json, vector<UserAction>& actions)
+{
+    Document doc;
+
+    char c_json[json.length() + 1];
+    strcpy(c_json, json.c_str());
+
+    // json validation:
+    if(doc.ParseInsitu(c_json).HasParseError()) {
+        cout << "doc.ParseInsitu(c_json).HasParseError() - failed" << endl;
+        return false;
+    }
+
+
+    // parse objects:
+    if(doc.HasMember("actions"))
+    {
+        if(doc["actions"].IsArray())
+        {
+            const Value& arr = doc["actions"].GetArray();
+            for(SizeType i = 0; i < arr.Size(); i++)
+            {
+
+                // fill ua object:
+                UserAction ua;
+                if(arr[i].HasMember("ts_fact")) {
+                    if(arr[i]["ts_fact"].IsInt()) {
+                        ua.ts_fact = static_cast<uint32_t>(arr[i]["ts_fact"].GetInt());
+                    }
+                }
+
+                if(arr[i].HasMember("fact_name")) {
+                    if(arr[i]["fact_name"].IsString()) {
+                        ua.fact_name = arr[i]["fact_name"].GetString();
+                    }
+                }
+
+                if(arr[i].HasMember("actor_id")) {
+                    if(arr[i]["actor_id"].IsInt()) {
+                        ua.actor_id = static_cast<uint32_t>(arr[i]["actor_id"].GetInt());
+                    }
+                }
+
+                // props:
+                if(arr[i].HasMember("props")) {
+                    if(arr[i]["props"].IsObject()) {
+                        auto props_node = arr[i]["props"].GetObject();
+                        for(auto itr = props_node.MemberBegin(); itr != props_node.MemberEnd(); ++itr) {
+                            if(itr->value.IsInt())
+                                ua.props[itr->name.GetString()] = itr->value.GetInt();
+                        }
+                    }
+                }
+
+                actions.push_back(ua);
+            }
+        }
+        else {
+            cout << "doc[\"actions\"].IsArray() - failed" << endl;
+            return false;
+        }
+    }
+    else {
+        cout << "doc.HasMember(\"actions\") - failed" << endl;
+        return false;
+    }
+
+    return true;
+}
+
+
+
 
 
 int main() {
 
-    map<string, int> m1;
-    m1["prop_name1"] = 1;
-    m1["prop_name2"] = 2;
-    m1["prop_name3"] = 3;
-
-    map<string, int> m2;
-    m2["prop_name1"] = 11;
-    m2["prop_name2"] = 22;
-    m2["prop_name3"] = 33;
-
-    map<string, int> m3;
-    m3["prop_name1"] = 111;
-    m3["prop_name2"] = 222;
-    m3["prop_name3"] = 333;
-
+    string sample_json;
+    if(!fileio::readfile("test_sample.json", sample_json)) {
+        cout << "failed to read test_sample.json" << endl;
+        return 1;
+    }
 
     vector<UserAction> vua;
-    vua.emplace_back(1483257600, "fact_name_1", m1); // Sunday, January 1, 2017 8:00:00 AM
-    vua.emplace_back(1483290000, "fact_name_2", m2); // Sunday, January 1, 2017 5:00:00 PM
-    vua.emplace_back(1483296840, "fact_name_1", m1); // Sunday, January 1, 2017 6:54:00 PM
-    vua.emplace_back(1483296845, "fact_name_1", m3);
-
-    vua.emplace_back(1483376400, "fact_name_1", m3); // Monday, January 2, 2017 5:00:00 PM
-
-    vua.emplace_back(1483462800, "fact_name_2", m3); // Tuesday, January 3, 2017 5:00:00 PM
-    vua.emplace_back(1483466400, "fact_name_1", m3); // Tuesday, January 3, 2017 6:00:00 PM
-
+    if(!parse_sample(sample_json, vua)) {
+        cout << "failed to parse test_sample.json" << endl;
+        return 1;
+    }
 
     auto by_date = sort_date(vua);
     map<Date, map<string, map<props, int>>> aggregated_info;
