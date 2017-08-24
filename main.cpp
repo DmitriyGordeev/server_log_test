@@ -205,34 +205,15 @@ vector<UserAction> load_logs(const string& path, size_t logs_num = 0)
 }
 
 
-int main_(int argc, char** argv) {
+int main(int argc, char** argv) {
 
-    // read and parse input json with player actions:
-    string sample_json;
-    if(!fileio::readfile("test_sample.json", sample_json)) {
-        cout << "failed to read test_sample.json" << endl;
-        return 1;
-    }
-
-    vector<UserAction> vua;
-    if(!parse_sample(sample_json, vua)) {
-        cout << "failed to parse test_sample.json" << endl;
-        return 1;
-    }
+    vector<UserAction> actions = load_logs("../log-dir/");
 
     // aggregate info and output to json
-    auto agr_info = Agr::aggregate(vua);
+    auto agr_info = Agr::aggregate(actions);
     string json = serialize(agr_info);
-    fileio::writefile("output_example.json", json);
+    fileio::writefile("agr.json", json);
 
-
-    return 0;
-}
-
-int main()
-{
-    vector<string> files;
-    vector<UserAction> actions = load_logs("../log-dir/");
 
     return 0;
 }
