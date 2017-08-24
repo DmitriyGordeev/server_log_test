@@ -61,8 +61,8 @@ string serialize(const map<Date, map<string, map<props, int>>>& input) {
     return sb.GetString();
 }
 
-bool parse_sample(const string& json, vector<UserAction>& actions)
-{
+bool parse_sample(const string& json, vector<UserAction>& actions) {
+
     Document doc;
 
     char c_json[json.length() + 1];
@@ -133,6 +133,7 @@ bool parse_sample(const string& json, vector<UserAction>& actions)
 
 int main(int argc, char** argv) {
 
+    // read and parse input json with player actions:
     string sample_json;
     if(!fileio::readfile("test_sample.json", sample_json)) {
         cout << "failed to read test_sample.json" << endl;
@@ -145,17 +146,10 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-//    auto by_date = sort_date(vua);
-//    map<Date, map<string, map<props, int>>> aggregated_info;
-//    for(auto p : by_date) {
-//        map<string, map<props, int>> by_fact = sort_inside_day(p.second);
-//        aggregated_info[p.first] = by_fact;
-//    }
-
+    // aggregate info and output to json
     auto agr_info = Agr::aggregate(vua);
-
     string json = serialize(agr_info);
-    fileio::writefile("serialized.json", json);
+    fileio::writefile("agr.json", json);
 
     return 0;
 }
