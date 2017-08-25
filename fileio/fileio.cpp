@@ -24,3 +24,21 @@ void fileio::writefile(const std::string& filename, const std::string& content)
     fout << content;
     fout.close();
 }
+
+bool fileio::files_list(const string& path, vector<string>& files) {
+
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir (path.c_str())) != NULL) {
+        while ((ent = readdir (dir)) != NULL) {
+            string name(ent->d_name);
+            files.push_back(name);
+        }
+        closedir (dir);
+    } else {
+        perror ("");
+        return false;
+    }
+
+    return true;
+}
