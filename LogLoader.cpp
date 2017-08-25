@@ -11,7 +11,7 @@ using namespace rapidjson;
 
 vector<UserAction> LogLoader::load(const std::string& logs_dir, size_t num_log_files, size_t num_threads)
 {
-    vector<thread> threads;
+    vector<thread> threads(num_threads);
     vector<UserAction> out;
     vector<string> file_names;
 
@@ -33,17 +33,20 @@ vector<UserAction> LogLoader::load(const std::string& logs_dir, size_t num_log_f
 
 
         // create threads:
-        vector<UserAction> file_actions;
-        for(size_t i = 0; i < num_threads; i++) {
-            threads.push_back(thread(single_log, logs_dir + file_names[i], ref(file_actions)));
-        }
+        for(size_t i = 0; i < file_names.size(); i += num_threads) {
 
-        for(size_t i = 0; i < num_threads; i++) {
-            threads[i].join();
-        }
+            vector<UserAction> file_actions;
+            for (size_t j = 0; j < num_threads; j++) {
+                if (i + j < file_names.size()) {
+                    threads[j] = thread(single_log, logs_dir + file_names[i + j], ref(file_actions));
+                }
+            }
 
-        for(int i = 0; i < log_count; i++)
-        {
+            for(size_t j = 0; j < num_threads; j++) {
+                if(threads[j].joinable())
+                    threads[j].join();
+            }
+
             out.insert(out.end(), file_actions.begin(), file_actions.end());
         }
     }
