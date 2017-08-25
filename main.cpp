@@ -94,6 +94,7 @@ int main(int argc, char** argv)
         return 1;
     }
 
+    cout << "Please wait ..." << endl;
 
     // 1. Reading log files with multithreading:
     vector<UserAction> actions = LogLoader::load(logs_dir, logs_num, threads_num);
@@ -104,6 +105,6 @@ int main(int argc, char** argv)
     string json = serialize(agr_info);
     fileio::writefile("agr.txt", json);
 
-
+    cout << "Result - agr.txt" << endl;
     return 0;
 }
