@@ -36,22 +36,28 @@ vector<UserAction> LogLoader::load(const std::string& logs_dir, size_t num_log_f
         }
 
 
-        // create threads:
         for(size_t i = 0; i < file_names.size(); i += num_threads) {
 
-            vector<UserAction> file_actions;
+            vector<vector<UserAction>> file_actions(num_threads);
             for (size_t j = 0; j < num_threads; j++) {
                 if (i + j < file_names.size()) {
-                    threads[j] = thread(single_log, logs_dir + file_names[i + j], ref(file_actions));
+                    threads[j] = thread(single_log, logs_dir + file_names[i + j], ref(file_actions[j]));
                 }
             }
 
+            cout << "before join" << endl;
+
             for(size_t j = 0; j < num_threads; j++) {
-                if(threads[j].joinable())
+                if(threads[j].joinable()) {
+                    cout << "thread " << j << " joined" << endl;
                     threads[j].join();
+                }
             }
 
-            out.insert(out.end(), file_actions.begin(), file_actions.end());
+            // collapse vector<vector>> to single vector:
+            for(size_t l = 0; l < file_actions.size(); l++) {
+                out.insert(out.end(), file_actions[l].begin(), file_actions[l].end());
+            }
         }
     }
 

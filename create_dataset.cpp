@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
 
     srand(time(NULL));
 
-    int action_NUM = 10;
+    int action_NUM = 1000;
 
     uint32_t ts_min = 1485337478; // Wednesday, January 25, 2017 9:44:38 AM
     uint32_t ts_max = 1485769478; // Monday,    January 30, 2017 9:44:38 AM
@@ -88,7 +88,22 @@ int main(int argc, char** argv) {
     props_3["p2"] = 222;
     props_3["p3"] = 333;
 
-    vector<map<string, int>> prop_variants { props_1, props_2, props_3 };
+    map<string, int> props_4;
+    props_4["p1"] = 1112;
+    props_4["p2"] = 2232;
+    props_4["p3"] = 3133;
+
+    map<string, int> props_5;
+    props_5["p1"] = 11212;
+    props_5["p2"] = 22332;
+    props_5["p3"] = 3133111;
+
+    map<string, int> props_6;
+    props_6["p1"] = 112323212;
+    props_6["p2"] = 2212332;
+    props_6["p3"] = 314433111;
+
+    vector<map<string, int>> prop_variants { props_1, props_2, props_3, props_4, props_5, props_6 };
 
     Randomizer r(ts_min, ts_max, fact_name_variants, prop_variants);
 
@@ -99,7 +114,7 @@ int main(int argc, char** argv) {
 
     // serialization and write to file:
     string sample_json = serialize_action_array(test_sample);
-    fileio::writefile("test_sample.json", sample_json);
+    fileio::writefile("../log-dir/file4.log", sample_json);
 
     return 0;
 }
