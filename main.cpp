@@ -72,6 +72,10 @@ int main(int argc, char** argv)
 
     // get args:
     string logs_dir(argv[1]);
+    if(logs_dir.back() != '/')
+        logs_dir.push_back('/');
+
+
     int logs_num = 0;
     try {
         logs_num = stoi(string(argv[2]));
