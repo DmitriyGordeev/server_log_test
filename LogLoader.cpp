@@ -66,15 +66,15 @@ bool LogLoader::parse_sample(const string& json, vector<UserAction>& actions) {
 
     Document doc;
 
-    char c_json[json.length() + 1];
+    char* c_json = new char[json.length()];
     strcpy(c_json, json.c_str());
 
     // json validation:
     if(doc.ParseInsitu(c_json).HasParseError()) {
         cout << "doc.ParseInsitu(c_json).HasParseError() - failed" << endl;
+        delete c_json;
         return false;
     }
-
 
     // parse objects:
     if(doc.HasMember("actions"))
@@ -129,6 +129,7 @@ bool LogLoader::parse_sample(const string& json, vector<UserAction>& actions) {
         return false;
     }
 
+    delete c_json;
     return true;
 }
 

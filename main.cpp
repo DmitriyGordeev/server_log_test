@@ -92,7 +92,7 @@ int main(int argc, char** argv)
 
 
     // 1. Reading log files with multithreading:
-    vector<UserAction> actions = LogLoader::load("../log-dir/", logs_num, threads_num);
+    vector<UserAction> actions = LogLoader::load(logs_dir, logs_num, threads_num);
 
 
     // 2. Aggregate info and output to json:
