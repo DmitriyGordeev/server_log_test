@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
 
     srand(time(NULL));
 
-    int action_NUM = 1000000;
+    int action_NUM = 50000;
 
     uint32_t ts_min = 1485337478; // Wednesday, January 25, 2017 9:44:38 AM
     uint32_t ts_max = 1485769478; // Monday,    January 30, 2017 9:44:38 AM
