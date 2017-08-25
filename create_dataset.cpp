@@ -1,5 +1,6 @@
+/* Small program for generate test dataset to work with */
+
 #include <iostream>
-#include <string>
 #include <vector>
 #include <map>
 
@@ -13,6 +14,8 @@ inline uint32_t random_int(uint32_t min, uint32_t max) {
     return rand() % (max - min + 1) + min;
 }
 
+/* create random UserAction from given ranges
+ * and property combinations */
 struct Randomizer {
 
     Randomizer(uint32_t ts_min, uint32_t ts_max,
