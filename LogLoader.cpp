@@ -11,6 +11,9 @@ using namespace rapidjson;
 
 vector<UserAction> LogLoader::load(const std::string& logs_dir, size_t num_log_files, size_t num_threads)
 {
+    if(num_threads < 1)
+        num_threads = 1;
+
     vector<thread> threads(num_threads);
     vector<UserAction> out;
     vector<string> file_names;
@@ -21,11 +24,12 @@ vector<UserAction> LogLoader::load(const std::string& logs_dir, size_t num_log_f
         file_names.erase(remove(file_names.begin(), file_names.end(), ".."), file_names.end());
 
         /* If files count less than specified logs_num it must be handled.
-         * By default (log_num = 0) take all found log files: */
+         * By default (num_log_files = 0) take all found log files: */
         size_t log_count = std::min(file_names.size(), num_log_files);
         if(num_log_files == 0) {
             log_count = file_names.size();
         }
+
 
         if(log_count < num_threads) {
             num_threads = log_count;
@@ -127,9 +131,9 @@ bool LogLoader::parse_sample(const string& json, vector<UserAction>& actions) {
 
 
 // privates:
-// process single log file (need for threading)
-bool LogLoader::single_log(const std::string& path, vector<UserAction>& actions)
-{
+// process single log file (for simple threading)
+bool LogLoader::single_log(const std::string& path, vector<UserAction>& actions) {
+
     struct stat buf;
     stat(path.c_str(), &buf);
     if(S_ISDIR(buf.st_mode)) {
