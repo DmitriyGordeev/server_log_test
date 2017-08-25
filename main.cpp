@@ -69,7 +69,33 @@ string serialize(const map<Date, map<string, map<props, int>>>& input) {
 
 int main(int argc, char** argv)
 {
-    vector<UserAction> actions = LogLoader::load("../log-dir/");
+    if(argc != 4) {
+        cout << "usage: [logs path] [logs number] [threads number]";
+        return 1;
+    }
+
+    // get args:
+    string logs_dir(argv[1]);
+    int logs_num = 0;
+    try {
+        logs_num = stoi(string(argv[2]));
+    }
+    catch(exception& e) {
+        cout << "second argument must be numeric!" << endl;
+        return 1;
+    }
+
+    int threads_num = 0;
+    try {
+        threads_num = stoi(string(argv[3]));
+    }
+    catch(exception& e) {
+        cout << "third argument must be numeric!" << endl;
+        return 1;
+    }
+
+
+    vector<UserAction> actions = LogLoader::load("../log-dir/", logs_num, threads_num);
 
     // aggregate info and output to json
     auto agr_info = Agr::aggregate(actions);
