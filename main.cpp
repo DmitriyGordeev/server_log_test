@@ -1,12 +1,8 @@
 #include <iostream>
 #include <algorithm>
 #include <map>
-#include <set>
-#include <dirent.h>
-#include <sys/stat.h>
 
 #include "Agr.h"
-#include "rapidjson/document.h"
 #include "fileio/fileio.h"
 #include "LogLoader.h"
 
@@ -95,9 +91,11 @@ int main(int argc, char** argv)
     }
 
 
+    // 1. Reading log files with multithreading:
     vector<UserAction> actions = LogLoader::load("../log-dir/", logs_num, threads_num);
 
-    // aggregate info and output to json
+
+    // 2. Aggregate info and output to json:
     auto agr_info = Agr::aggregate(actions);
     string json = serialize(agr_info);
     fileio::writefile("agr.json", json);

@@ -62,8 +62,6 @@ string serialize_action_array(const vector<UserAction>& vua) {
     return sb.GetString();
 }
 
-
-
 int main(int argc, char** argv) {
 
     srand(time(NULL));
