@@ -1,4 +1,4 @@
-/* simple class for read / write files */
+/* simple read / write file static class */
 
 #ifndef GAMELOGPARSER_FILEIO_H
 #define GAMELOGPARSER_FILEIO_H

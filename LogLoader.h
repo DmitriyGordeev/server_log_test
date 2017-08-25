@@ -1,3 +1,8 @@
+/*
+ * Class for multithreaded load and parse
+ * player actions jsons from given directory
+ */
+
 #ifndef GAMELOGPARSER_LOGLOADER_H
 #define GAMELOGPARSER_LOGLOADER_H
 

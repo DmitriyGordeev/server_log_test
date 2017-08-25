@@ -98,7 +98,7 @@ int main(int argc, char** argv)
     // 2. Aggregate info and output to json:
     auto agr_info = Agr::aggregate(actions);
     string json = serialize(agr_info);
-    fileio::writefile("agr.json", json);
+    fileio::writefile("agr.txt", json);
 
 
     return 0;

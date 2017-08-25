@@ -135,7 +135,7 @@ bool LogLoader::parse_sample(const string& json, vector<UserAction>& actions) {
 
 
 // privates:
-// process single log file (for simple threading)
+// processing single log file (for simple threading)
 bool LogLoader::single_log(const std::string& path, vector<UserAction>& actions) {
 
     struct stat buf;

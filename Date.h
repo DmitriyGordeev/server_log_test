@@ -1,3 +1,8 @@
+/*
+ * Simple date class
+ * for sorting player actions by date
+ */
+
 #ifndef GAMELOGPARSER_DATE_H
 #define GAMELOGPARSER_DATE_H
 

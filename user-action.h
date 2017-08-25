@@ -1,3 +1,8 @@
+/*
+ * UserAction store all player action info
+ * with serialization (json) methods
+ */
+
 #ifndef GAMELOGPARSER_USER_ACTION_H
 #define GAMELOGPARSER_USER_ACTION_H
 

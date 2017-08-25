@@ -1,3 +1,9 @@
+/*
+ * Aggregator class
+ * collect actions by date (timestamp) , fact_name and props combinations
+ */
+
+
 #ifndef GAMELOGPARSER_AGR_H
 #define GAMELOGPARSER_AGR_H
 
