@@ -45,11 +45,8 @@ vector<UserAction> LogLoader::load(const std::string& logs_dir, size_t num_log_f
                 }
             }
 
-            cout << "before join" << endl;
-
             for(size_t j = 0; j < num_threads; j++) {
                 if(threads[j].joinable()) {
-                    cout << "thread " << j << " joined" << endl;
                     threads[j].join();
                 }
             }
