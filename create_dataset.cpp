@@ -117,7 +117,7 @@ int main(int argc, char** argv) {
 
     // serialization and write to file:
     string sample_json = serialize_action_array(test_sample);
-    fileio::writefile("../log-dir/file4.log", sample_json);
+    fileio::writefile("../test-log-dir/file4.log", sample_json);
 
     return 0;
 }
