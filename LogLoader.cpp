@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sys/stat.h>
 #include <algorithm>
+#include <sstream>
 
 #include "LogLoader.h"
 #include "rapidjson/document.h"
@@ -136,7 +137,7 @@ bool LogLoader::parse_sample(const string& json, vector<UserAction>& actions) {
 
 // privates:
 // processing single log file (for simple threading)
-bool LogLoader::single_log(const std::string& path, vector<UserAction>& actions) {
+bool single_log_old(const std::string& path, vector<UserAction>& actions) {
 
     struct stat buf;
     stat(path.c_str(), &buf);
@@ -149,5 +150,27 @@ bool LogLoader::single_log(const std::string& path, vector<UserAction>& actions)
         return false;
     }
 
-    return parse_sample(json, actions);
+    // return parse_sample(json, actions);
+    return true;
+}
+
+
+bool LogLoader::single_log(const std::string& path, vector<UserAction>& actions)
+{
+    string data;
+    if(!fileio::readfile(path, data)) {
+        return false;
+    }
+
+    istringstream is(data);
+    string line_json;
+    while(getline(is, line_json)) {
+
+        UserAction ua;
+        if(ua.parse(line_json)) {
+            actions.push_back(ua);
+        }
+    }
+
+    return true;
 }
