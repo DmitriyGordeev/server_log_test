@@ -42,11 +42,11 @@ vector<UserAction> LogLoader::load(const std::string& logs_dir, size_t num_log_f
         }
 
 
-        for(size_t i = 0; i < file_names.size(); i += num_threads) {
+        for(size_t i = 0; i < log_count; i += num_threads) {
 
             vector<vector<UserAction>> file_actions(num_threads);
             for (size_t j = 0; j < num_threads; j++) {
-                if (i + j < file_names.size()) {
+                if (i + j < log_count) {
                     threads[j] = thread(single_log, logs_dir + file_names[i + j], ref(file_actions[j]));
                 }
             }
