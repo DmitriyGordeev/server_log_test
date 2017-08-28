@@ -24,6 +24,11 @@ vector<UserAction> LogLoader::load(const std::string& logs_dir, size_t num_log_f
         file_names.erase(remove(file_names.begin(), file_names.end(), "."), file_names.end());
         file_names.erase(remove(file_names.begin(), file_names.end(), ".."), file_names.end());
 
+        if(file_names.empty()) {
+            cout << "log folder: \"" << logs_dir << "\" is empty" << endl;
+            return out;
+        }
+
         /* If files count less than specified logs_num it must be handled.
          * By default (num_log_files = 0) take all found log files: */
         size_t log_count = std::min(file_names.size(), num_log_files);
@@ -62,6 +67,29 @@ vector<UserAction> LogLoader::load(const std::string& logs_dir, size_t num_log_f
     return out;
 }
 
+// processing single log file:
+bool LogLoader::single_log(const std::string& path, vector<UserAction>& actions) {
+
+    string data;
+    if(!fileio::readfile(path, data)) {
+        return false;
+    }
+
+    istringstream is(data);
+    string line_json;
+    while(getline(is, line_json)) {
+
+        UserAction ua;
+        if(ua.parse(line_json)) {
+            actions.push_back(ua);
+        }
+    }
+
+    return true;
+}
+
+
+// --------------  UNUSED METHODS:
 // parse input player actions json (see input_example.json)
 bool LogLoader::parse_sample(const string& json, vector<UserAction>& actions) {
 
@@ -135,8 +163,6 @@ bool LogLoader::parse_sample(const string& json, vector<UserAction>& actions) {
 }
 
 
-// privates:
-// processing single log file (for simple threading)
 bool single_log_old(const std::string& path, vector<UserAction>& actions) {
 
     struct stat buf;
@@ -155,22 +181,3 @@ bool single_log_old(const std::string& path, vector<UserAction>& actions) {
 }
 
 
-bool LogLoader::single_log(const std::string& path, vector<UserAction>& actions)
-{
-    string data;
-    if(!fileio::readfile(path, data)) {
-        return false;
-    }
-
-    istringstream is(data);
-    string line_json;
-    while(getline(is, line_json)) {
-
-        UserAction ua;
-        if(ua.parse(line_json)) {
-            actions.push_back(ua);
-        }
-    }
-
-    return true;
-}
