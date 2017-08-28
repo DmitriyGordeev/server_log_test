@@ -99,12 +99,13 @@ int main(int argc, char** argv)
     // 1. Reading log files with multithreading:
     vector<UserAction> actions = LogLoader::load(logs_dir, logs_num, threads_num);
 
-
     // 2. Aggregate info and output to json:
-    auto agr_info = Agr::aggregate(actions);
-    string json = serialize(agr_info);
-    fileio::writefile("agr.txt", json);
+    if(!actions.empty()) {
+        auto agr_info = Agr::aggregate(actions);
+        string json = serialize(agr_info);
+        fileio::writefile("agr.txt", json);
+        cout << "Result - agr.txt" << endl;
+    }
 
-    cout << "Result - agr.txt" << endl;
     return 0;
 }

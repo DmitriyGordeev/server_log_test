@@ -36,7 +36,7 @@ bool fileio::files_list(const string& path, vector<string>& files) {
         }
         closedir (dir);
     } else {
-        perror ("");
+        perror(path.c_str());
         return false;
     }
 
