@@ -13,8 +13,3 @@ target_link_libraries(GameLogParser pthread)
 
 # dataset creator
 add_executable(create_dataset ${FILEIO_SOURCE} create_dataset.cpp)
-
-
-# minor test
-set(TEST_SOURCE test.cpp)
-add_executable(minor_test ${TEST_SOURCE} ${FILEIO_SOURCE})
