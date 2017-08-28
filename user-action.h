@@ -8,6 +8,7 @@
 
 #include <map>
 #include "rapidjson/prettywriter.h"
+#include "rapidjson/document.h"
 
 struct UserAction {
 
@@ -53,6 +54,64 @@ struct UserAction {
 
         pw.EndObject();
 
+    }
+
+    bool parse(const std::string json_str) {
+        rapidjson::Document doc;
+
+        char* c_json = new char[json_str.length()];
+        strcpy(c_json, json_str.c_str());
+        
+        // json validation:
+        if(doc.ParseInsitu(c_json).HasParseError()) {
+            delete c_json;
+            return false;
+        }
+
+
+        if(doc.HasMember("ts_fact")) {
+            if(doc["ts_fact"].IsInt()) {
+                ts_fact = static_cast<uint32_t>(doc["ts_fact"].GetInt());
+            } else
+                return false;
+        }
+        else
+            return false;
+
+        if(doc.HasMember("fact_name")) {
+            if(doc["fact_name"].IsString()) {
+                fact_name = doc["fact_name"].GetString();
+            } else
+                return false;
+        }
+        else
+            return false;
+
+        if(doc.HasMember("actor_id")) {
+            if(doc["actor_id"].IsInt()) {
+                actor_id = static_cast<uint32_t>(doc["actor_id"].GetInt());
+            } else
+                return false;
+        }
+        else
+            return false;
+
+        // props:
+        if(doc.HasMember("props")) {
+            if(doc["props"].IsObject()) {
+                auto props_node = doc["props"].GetObject();
+                for(auto itr = props_node.MemberBegin(); itr != props_node.MemberEnd(); ++itr) {
+                    if(itr->value.IsInt())
+                        props[itr->name.GetString()] = itr->value.GetInt();
+                }
+            }
+            else
+                return false;
+        }
+        else
+            return false;
+
+        return true;
     }
 
     
