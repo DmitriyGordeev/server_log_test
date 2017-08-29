@@ -5,6 +5,7 @@
 #include "Agr.h"
 #include "fileio/fileio.h"
 #include "LogLoader.h"
+#include "timeformat.h"
 
 using namespace std;
 using namespace rapidjson;
@@ -21,8 +22,8 @@ string serialize(const map<Date, map<string, map<props, int>>>& input) {
     for(auto p_date : input)
     {
         time_t ts = p_date.first.timestamp();
-        string date_str = ctime(&ts);
-        date_str.pop_back();
+        string date_str = time_format(ts, "%d/%m/%Y");
+
         pw.Key(date_str.c_str());
         pw.StartArray();
 
